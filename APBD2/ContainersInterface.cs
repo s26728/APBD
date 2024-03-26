@@ -11,7 +11,6 @@ public abstract class ContainersInterface
             Console.WriteLine("2. Find container by ID");
             Console.WriteLine("3. Create a ship");
             Console.WriteLine("4. Find a ship by name");
-            Console.WriteLine("5. List all containers");
             Console.WriteLine("6. List all ships");
             Console.WriteLine("7. Exit");
             string choice = Console.ReadLine();
@@ -43,7 +42,7 @@ public abstract class ContainersInterface
 
                 case "6":
                     Console.WriteLine("Ships List");
-                    ContainerShip.printAllShips(ContainerShip.containerShips);
+                    Ship.printAllShips(Ship.containerShips);
 
                     break;
 
@@ -155,7 +154,7 @@ public abstract class ContainersInterface
 
     public static void createShipMenu()
     {
-        ContainerShip.creationMenu();
+        Ship.creationMenu();
     }
 
     public static void MainShipMenu()
@@ -164,7 +163,7 @@ public abstract class ContainersInterface
         {
             Console.Write("Enter your ship name: ");
             string choice = Console.ReadLine();
-            ContainerShip containerShip = ContainerShip.findContainerShipByName(choice);
+            Ship containerShip = Ship.findContainerShipByName(choice);
             if (containerShip == null)
             {
                 return;
@@ -184,7 +183,7 @@ public abstract class ContainersInterface
             switch (choice)
             {
                 case "1":
-                    ContainerShip.LoadToShipMenu(containerShip);
+                    Ship.LoadToShipMenu(containerShip);
                     break;
 
                 case "2":
@@ -205,7 +204,7 @@ public abstract class ContainersInterface
                     break;
 
                 case "4":
-                    ContainerShip.deleteShip(containerShip.Name);
+                    Ship.deleteShip(containerShip.Name);
                     break;
 
                 case "5":

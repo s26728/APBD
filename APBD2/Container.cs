@@ -34,26 +34,6 @@
 
         public abstract void PrintInfo();
 
-        public String getFullType()
-        {
-            if (ConType == "L")
-            {
-                return "Liquid";
-            }
-            else if (ConType == "G")
-            {
-                return "Gas";
-            }
-            else if (ConType == "C")
-            {
-                return "Refrigerated";
-            }
-            else
-            {
-                throw new System.ArgumentException("Invalid");
-            }
-        }
-
         private static string GenerateSerialNumber(string type)
 
         {
@@ -75,7 +55,7 @@
         public static void deleteContainer(string serialNumber)
         {
             ContainerList.RemoveAll(c => c.SerialNumber == serialNumber);
-            foreach (ContainerShip s in ContainerShip.containerShips)
+            foreach (Ship s in Ship.containerShips)
             {
                 s.Containers.RemoveAll(c => c.SerialNumber == serialNumber);
             }
@@ -96,7 +76,7 @@
 
         public static void LoadToShipMenu(Container container)
         {
-            if (ContainerShip.checkInUseContainer(container) != null)
+            if (Ship.checkInUseContainer(container) != null)
             {
                 Console.WriteLine("Container is already in use");
                 return;
@@ -105,8 +85,8 @@
             {
                 Console.WriteLine("Enter ship name:");
                 string name = Console.ReadLine();
-                ContainerShip containerShip = ContainerShip.findContainerShipByName(name);
-                containerShip.printInfo();
+                Ship ship = Ship.findContainerShipByName(name);
+                ship.printInfo();
 
                 Console.WriteLine("1. Add this container to ship");
                 Console.WriteLine("2. Exit");
@@ -117,7 +97,7 @@
                     case "1":
                         try
                         {
-                            containerShip.AddContainer(container);
+                            ship.AddContainer(container);
                             Console.WriteLine("Container added to ship");
                         }
                         catch (Exception e)

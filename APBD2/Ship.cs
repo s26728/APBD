@@ -2,9 +2,9 @@
 
 namespace Task2
 {
-    public class ContainerShip
+    public class Ship
     {
-        public ContainerShip(string name, int maxSpeed, int maxContainerNumber, double maxWeight)
+        public Ship(string name, int maxSpeed, int maxContainerNumber, double maxWeight)
 
         {
             if (isNameTaken(name))
@@ -18,7 +18,7 @@ namespace Task2
             containerShips.Add(this);
         }
 
-        public static List<ContainerShip> containerShips = new List<ContainerShip>();
+        public static List<Ship> containerShips = new List<Ship>();
         public List<Container> Containers { get; set; } = new List<Container>();
         public int MaxSpeed { get; }
         public int MaxContainerNumber { get; }
@@ -48,9 +48,9 @@ namespace Task2
             Containers.Remove(container);
         }
 
-        public static ContainerShip findContainerShipByName(string name)
+        public static Ship findContainerShipByName(string name)
         {
-            foreach (ContainerShip containerShip in containerShips)
+            foreach (Ship containerShip in containerShips)
             {
                 if (containerShip.Name == name)
                 {
@@ -62,7 +62,7 @@ namespace Task2
 
         public bool isNameTaken(string name)
         {
-            foreach (ContainerShip containerShip in containerShips)
+            foreach (Ship containerShip in containerShips)
             {
                 if (containerShip.Name == name)
                 {
@@ -78,17 +78,12 @@ namespace Task2
             Container.printAllContainers(this.Containers);
         }
 
-        public static void printAllShips(List<ContainerShip> listShips)
+        public static void printAllShips(List<Ship> listShips)
         {
-            foreach (ContainerShip ship in listShips)
+            foreach (Ship ship in listShips)
             {
                 ship.printInfo();
             }
-        }
-
-        public object Shallowcopy()
-        {
-            return this.MemberwiseClone();
         }
 
         public static void creationMenu()
@@ -107,9 +102,9 @@ namespace Task2
                 Console.WriteLine("Enter max weight:");
                 double maxWeight = double.Parse(Console.ReadLine());
 
-                ContainerShip containerShip = new ContainerShip(name, maxSpeed, maxContainerNumber, maxWeight);
+                Ship ship = new Ship(name, maxSpeed, maxContainerNumber, maxWeight);
                 Console.WriteLine("Ship created successfully.");
-                containerShip.printInfo();
+                ship.printInfo();
             }
             catch (Exception e)
             {
@@ -122,7 +117,7 @@ namespace Task2
             containerShips.RemoveAll(s => s.Name == name);
         }
 
-        public static ContainerShip checkInUseContainer(Container container)
+        public static Ship checkInUseContainer(Container container)
         {
             for (int i = 0; i < containerShips.Count; i++)
             {
@@ -150,7 +145,7 @@ namespace Task2
             }
         }
 
-        public static void LoadToShipMenu(ContainerShip containerShip)
+        public static void LoadToShipMenu(Ship ship)
         {
             try
             {
@@ -173,7 +168,7 @@ namespace Task2
                     case "1":
                         try
                         {
-                            containerShip.AddContainer(container);
+                            ship.AddContainer(container);
                             Console.WriteLine("Container added to ship");
                         }
                         catch (Exception e)
@@ -253,6 +248,4 @@ namespace Task2
             }
         }
     }
-
-    // Other methods - for loading cargo, removing container, etc.
 }

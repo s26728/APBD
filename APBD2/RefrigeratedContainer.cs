@@ -3,11 +3,12 @@
     public class RefrigeratedContainer : Container
     {
         public RefrigeratedContainer(double cargoMass, double height, double tareWeight, double depth, double maxPayload, string productType, double temperature)
-            : base("C", cargoMass, height, tareWeight, depth, maxPayload)
+            : base("F", cargoMass, height, tareWeight, depth, maxPayload)
         {
             if (temperature < Product.getTemperatureByName(productType) && Product.getTemperatureByName(productType) != -999)
             {
-                throw new TemperatureTooLowException("Temperature is too low for this product.");
+                Console.WriteLine("Temperature regulations are not compatible");
+                return;
             }
             ProductType = productType;
             Temperature = temperature;
